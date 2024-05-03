@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ${MYSQL_CLAIM}
+  name: ${WP_PV_NAME}
   labels:
     app: ${APP}
     tier: mysql
@@ -11,4 +11,4 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: ${MYSQL_DISK_SIZE}Gi
+      storage: ${WP_DISK_SIZE}Gi

@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${APP}
+  labels:
+    app: ${APP}
+spec:
+  selector:
+    matchLabels:
+      app: ${APP}
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ${APP}
+        tier: frontend
+    spec:
+      containers:
+      - image: ${APP}:6.2.1-apache
+        name: ${APP}
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: mysql-${APP}
+        - name: WORDPRESS_DB_PASSWORD
+          value: sqlpass
+        - name: WORDPRESS_DB_USER
+          value: ${APP}
+        ports:
+        - containerPort: 80
+          name: ${APP}
+        volumeMounts:
+        - name: ${APP}-persistent-storage
+          mountPath: /var/www/html
+        resources:
+          limits:
+            memory: "6Gi"
+            cpu: "700m"
+          requests:
+            memory: "5Gi"
+            cpu: "500m"
+      volumes:
+      - name: ${APP}-persistent-storage
+        persistentVolumeClaim:
+          claimName: ${WP_CLAIM}
