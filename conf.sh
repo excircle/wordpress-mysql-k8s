@@ -14,7 +14,8 @@ export MYSQL_PORT="3306"
 ### WORDPRESS ###
 #################
 
-export WP_PV_NAME="wp-pv-claim"
-export WP_DISK_SIZE="10"
-export WP_DIR_NAME="wordpress-data"
 export WP_CLAIM="wp-pv-claim"
+export WP_DIR_NAME="wordpress-data"
+export WP_DISK_SIZE="10"
+export WP_PV_NAME="wp-pv-vol"
+export WP_PORT="80"
